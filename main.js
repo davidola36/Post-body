@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.tinymce', 'ngFileUpload', 'ngYoutubeEmbed', 'ngVimeo']);
+var app = angular.module('myApp', ['ui.tinymce', 'ngFileUpload', 'ngYoutubeEmbed']);
 
 // form element creation directive
  app.directive("biUiBuilder", function($compile){
@@ -179,7 +179,7 @@ app.directive("videoPlugin", function($compile){
 	
 		switch(elem.type){
 			case 'youtube':
-				inset += '<ng-youtube-embed video="elem.value" autoplay="true" color="white" disablekb="true" end="20">' +
+				inset += '<ng-youtube-embed video="elem.value" autoplay="false" color="white" disablekb="true" end="20">' +
 					'</ng-youtube-embed>'
 				break;
 			case 'vimeo':
