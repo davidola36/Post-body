@@ -13,11 +13,6 @@
     <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="main.js"></script>
     <script src="ng-youtube-embed.min.js"></script>
-    <script src="angular-vimeo-master/bower_components/angular-route/angular-route.js"></script>
-    <script src="angular-vimeo-master/src/angular-vimeo.js"></script>
-    <script src="angular-vimeo-master/bower_components/angular/angular.js"></script>
-    <script src="angular-vimeo-master/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="angular-vimeo-master\dist\angular-vimeo.min.js"></script>
     <style>
     </style>
 </head>
@@ -41,6 +36,7 @@
             </div>
             <input type="text" ng-model="plugin.url">
             <input data-ng-click="addYoutube()" type="button" value="Add Youtube Video">
+            <input type="text" ng-model="plugin.vurl">
             <input data-ng-click="addVimeo()" onclick="init()" type="button" value="Add Vimeo Video">
 
         </div>

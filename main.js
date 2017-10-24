@@ -164,14 +164,7 @@ app.controller('MyCtrl', ['$scope', 'Upload', function ($scope, Upload) {
     };	
 }]);
 
-/*app.config(function($sceDelegateProvider) {
-	$sceDelegateProvider.resourceUrlWhitelist([
-	  'self',
-	  '*://www.youtube.com/**'
-	]);
-  });  */
 
-		
 app.directive("videoPlugin", function($compile){
 
 	var getPlayer = function(elem){
@@ -214,9 +207,6 @@ app.controller('videoPluginCtrl', ['$scope', function($scope){
 		url : 'https://www.youtube.com/watch?v=QXV0O1MhaIY',
 		vurl: "7100569"
 	}
-
-	
-	$scope.vimeoUrl =  "http://www.vimeo.com/"	+ $scope.plugin.vurl 
 	  
 	$scope.addYoutube= function(){
 		console.log("clicked");
@@ -226,22 +216,14 @@ app.controller('videoPluginCtrl', ['$scope', function($scope){
 		})
 	}
 	
-	
-
 	$scope.addVimeo= function(){
 		$scope.video.items.push({
 		 type : "vimeo" ,
 		 value: $scope.vimeoUrl
 		})
-		console.log($scope.video.items);
 		
 	   }
 }]);
-
-	
-
-
-
 
 app.controller('socialMediaCtrl', ['$scope', function($scope){
 	$scope.social = {
@@ -263,7 +245,6 @@ app.controller('socialMediaCtrl', ['$scope', function($scope){
 
 
 }]);
-
 
 app.directive("socialMedia", function($compile, $timeout){
 	var getPlayer = function(elem){
