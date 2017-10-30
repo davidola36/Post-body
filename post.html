@@ -3,17 +3,27 @@
 
 <head>
     <link rel="stylesheet/css" src="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="ngtweet/dist/ngtweet.min.js"></script>    
     <script type="text/javascript" src="app/bower_components/tinymce/tinymce.js"></script>
-    <script type="text/javascript" src="app/bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="app/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
     <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="main.js"></script>
     <script src="ng-youtube-embed.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#ytube").click(function(){
+            $("#myDIV").toggle();
+        });
+    });
+    </script>
     <style>
+    .no-dis{
+        display: none;
+    }
     </style>
 </head>
 
@@ -28,21 +38,19 @@
                 <bi-ui-builder elem="elem" remove="removeElementMain"></bi-ui-builder>
             </div>
             <a href="" data-ng-click="addTextbox()">Add Text Box</a>
-        </div>
-
-        <div ng-controller="videoPluginCtrl" id="video">
-            <div data-ng-repeat="elem in video.items">
-                <video-plugin elem="elem" remove="removeElementMain" url="plugin.url"></video-plugin>
-            </div>
+            <a id="ytube" href="">Add Youtube</a>
+            <div id="myDIV" class="no-dis">          
             <input type="text" ng-model="plugin.url">
             <input data-ng-click="addYoutube()" type="button" value="Add Youtube Video">
+            <input data-ng-click="deleteStage()" type="button" value="delete">
+            </div>
             <input type="text" ng-model="plugin.vurl">
             <input data-ng-click="addVimeo()" onclick="init()" type="button" value="Add Vimeo Video">
-
         </div>
+
         <div ng-controller="socialMediaCtrl">
-            <input type="text" ng-model="plugin.url">
-            <input type="button" data-ng-click="addFacebook()" value="add facebook">
+            <input type="text" ng-model="plugin.id" placeholder="Enter tweet id">
+            <input type="button" data-ng-click="addTwitter()" value="add Twitter">
             <div data-ng-repeat="elem in social.items">
                 <social-media elem="elem"></social-media>
         </div>

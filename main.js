@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.tinymce', 'ngFileUpload', 'ngYoutubeEmbed']);
+var app = angular.module('myApp', ['ngtweet','ui.tinymce', 'ngFileUpload', 'ngYoutubeEmbed']);
 
 // form element creation directive
  app.directive("biUiBuilder", function($compile){
@@ -82,7 +82,17 @@ var app = angular.module('myApp', ['ui.tinymce', 'ngFileUpload', 'ngYoutubeEmbed
 					"<a style=\"padding: 15px; background: #d72927; color: #fff; display: block; text-decoration: none; font-size:14px; text-align: center; text-transform: uppercase; border-radius: 3px;\" target=\"_blank\" href=\"{{elem.link}}\">{{elem.value}}</a>"+
 				"</div>";
 				
-                break;
+				break;
+			case 'youtube':
+				inset += '<ng-youtube-embed video="elem.value" autoplay="false" color="white" disablekb="true" end="20">' +
+					'</ng-youtube-embed>'
+			
+				break;
+			case 'vimeo':
+				inset += ' <div id="embed">Loading video...</div>'
+			
+				break;
+			
         }
 		
 		inset += "</div>";
@@ -131,7 +141,39 @@ app.controller("addtext", ['$scope', function($scope){
 		"<p>This is a text block. You can use it to add text to your template.</p>"
 	 })
 	}
-	
+
+	$scope.plugin= {
+		url : '',
+		vurl: "7100569"
+	}
+	  
+	$scope.addYoutube= function(){
+		console.log("clicked");
+		$scope.letter.items.push({
+		type : "youtube" ,
+		value: $scope.plugin.url
+		})
+	}
+	console.log($scope.letter.items)
+	$scope.addVimeo= function(){
+		$scope.letter.items.push({
+		 type : "vimeo" ,
+		 value: $scope.vimeoUrl
+		})	
+	}
+
+	$scope.deleteStage = function(){
+		console.log($scope.letter.items)
+		
+	//	var object = $scope.letter.items
+	//	for (var type in object){
+	//		if (object[key] === "youtube"){
+				
+	//		}
+	//	}
+		
+	}
+
 }])
 
 // Controller for file upload
@@ -220,9 +262,8 @@ app.controller('videoPluginCtrl', ['$scope', function($scope){
 		$scope.video.items.push({
 		 type : "vimeo" ,
 		 value: $scope.vimeoUrl
-		})
-		
-	   }
+		})	
+	}
 }]);
 
 app.controller('socialMediaCtrl', ['$scope', function($scope){
@@ -230,16 +271,16 @@ app.controller('socialMediaCtrl', ['$scope', function($scope){
 		items:[]
 	};
 	$scope.plugin = {
-		url : "https://www.facebook.com/"
+		id : ''
 	}
 
 
 	
 	  
-	$scope.addFacebook= function(){
+	$scope.addTwitter= function(){
 		$scope.social.items.push({
-		type : "facebook" ,
-		value: $scope.plugin.url
+		type : "twitter" ,
+		value: $scope.plugin.id
 		})
 	}
 
@@ -251,8 +292,9 @@ app.directive("socialMedia", function($compile, $timeout){
 		inset = ""
 		
 		switch(elem.type){
-			case "facebook":
-				inset += '<div class="fb-post" data-href="elem.value"></div>'
+			case "twitter":
+				inset += '<twitter-widget twitter-widget-id="elem.value"></twitter-widget>' 
+
 				break;
 
 		}
@@ -265,11 +307,6 @@ app.directive("socialMedia", function($compile, $timeout){
 		link: function(scope,element,attrs) {
 			element.html(getPlayer(scope.elem));
 			$compile(element.contents())(scope);
-		//	$timeout(function() {
-		//		if (FB) {
-		//		  FB.XFBML.parse(element[0]);
-		//		}
-		//	});
 		
 		},
 		scope: {
