@@ -207,73 +207,19 @@ app.controller('MyCtrl', ['$scope', 'Upload', function ($scope, Upload) {
 }]);
 
 
-app.directive("videoPlugin", function($compile){
-
-	var getPlayer = function(elem){
-		var inset = ""
-	
-		switch(elem.type){
-			case 'youtube':
-				inset += '<ng-youtube-embed video="elem.value" autoplay="false" color="white" disablekb="true" end="20">' +
-					'</ng-youtube-embed>'
-				break;
-			case 'vimeo':
-				inset += ' <div id="embed">Loading video...</div>'
-				break;
-			
-		
-		}
-		return inset
-	}
-
-	return{
-		restrict: 'E',
-		link: function(scope,element,attrs) {
-			element.html(getPlayer(scope.elem));
-			$compile(element.contents())(scope);
-		},
-		scope: {
-			elem: '=',
-			settings: '='
-		},
-	}
-});
-
-app.controller('videoPluginCtrl', ['$scope', function($scope){
-	$scope.video = {
-		items:[]
-	};
-
-	// youtube
-	$scope.plugin= {
-		url : 'https://www.youtube.com/watch?v=QXV0O1MhaIY',
-		vurl: "7100569"
-	}
-	  
-	$scope.addYoutube= function(){
-		console.log("clicked");
-		$scope.video.items.push({
-		type : "youtube" ,
-		value: $scope.plugin.url
-		})
-	}
-	
-	$scope.addVimeo= function(){
-		$scope.video.items.push({
-		 type : "vimeo" ,
-		 value: $scope.vimeoUrl
-		})	
-	}
-}]);
 
 app.controller('socialMediaCtrl', ['$scope', function($scope){
 	$scope.social = {
 		items:[]
 	};
+
 	$scope.plugin = {
 		id : ''
 	}
 
+	$scope.plugin = {
+		url: 'https://www.facebook.com/20531316728/posts/10154009990506729/'
+	}
 
 	
 	  
@@ -281,6 +227,14 @@ app.controller('socialMediaCtrl', ['$scope', function($scope){
 		$scope.social.items.push({
 		type : "twitter" ,
 		value: $scope.plugin.id
+		})
+	}
+
+	$scope.addFacebook= function(){
+		console.log("clicked")
+		$scope.social.items.push({
+		type : "facebook" ,
+		value: $scope.plugin.url
 		})
 	}
 
@@ -293,10 +247,11 @@ app.directive("socialMedia", function($compile, $timeout){
 		
 		switch(elem.type){
 			case "twitter":
-				inset += '<twitter-widget twitter-widget-id="elem.value"></twitter-widget>' 
+				inset += '<twitter-widget twitter-widget-id="elem.value"></twitter-widget> <input type="text" ng-model = "elem.value">' 
 
 				break;
-
+			case "facebook":
+				inset += '<div class="fb-post" data-href="https://www.facebook.com/benayor/posts/1538853522864994" data-width="500"></div><div>some text</div> '
 		}
 		return inset
 	

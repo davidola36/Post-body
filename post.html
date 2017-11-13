@@ -20,6 +20,34 @@
         });
     });
     </script>
+    <script>
+        window.fbAsyncInit = function(response) {
+            FB.init({
+            appId            : 1720104441630076,
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v2.10'
+            });
+            FB.AppEvents.logPageView();
+            /*try{
+                alert("hello");
+            }
+            catch(e){
+                console.log(e);
+            }*/
+        };
+        
+</script>
+         <script>
+            
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+        </script>
     <style>
     .no-dis{
         display: none;
@@ -29,6 +57,7 @@
 
 <body>
     <div ng-app="myApp">
+            <div id="fb-root"></div> 
         <form ng-controller="MyCtrl" name="form">
             <input type="file" ngf-select="uploadFiles($files)" multiple="multiple" value="upload file">
         </form>
@@ -53,9 +82,15 @@
             <input type="button" data-ng-click="addTwitter()" value="add Twitter">
             <div data-ng-repeat="elem in social.items">
                 <social-media elem="elem"></social-media>
+            </div>
+            <input type="text" ng-model="plugin.url">
+            <input type="button" data-ng-click="addFacebook()" value="add Facebook">            
+            
+            <div class="fb-post" data-href="https://www.facebook.com/20531316728/posts/10154009990506729/" data-width="500"></div>
+            
         </div>
-        <vimeo settings="vimeoConfig"></vimeo>
-        </div>
+
+        
 
     </div>
 
